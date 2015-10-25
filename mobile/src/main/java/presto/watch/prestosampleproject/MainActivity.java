@@ -15,9 +15,20 @@ import android.content.Intent;
 import android.net.Uri;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
+
+//SMS
+import android.telephony.SmsManager;
+
+//location
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+
+import static java.lang.Math.round;
+import static presto.watch.prestosampleproject.Globals.COORD;
 
 public class MainActivity extends AbstractPhoneGestureActivity {
+    private LocationListener locationListener=null;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,7 +50,33 @@ public class MainActivity extends AbstractPhoneGestureActivity {
 
     @Override
     public void onFlick() {
-        Toast.makeText(this,"Flick that thang!",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Flick that thang and... TEXT!",Toast.LENGTH_LONG).show();
+
+        //location
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new MyLocationListener();
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+
+        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        Location location;
+        double longitude = 0;
+        double latitude = 0;
+
+        if (isGPSEnabled && isNetworkEnabled) {
+             if (locationManager != null) {
+                    location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                    if (location != null) {
+                        latitude = location.getLatitude();
+                        longitude = location.getLongitude();
+                    }
+                }
+        }
+        COORD = "Help me at (" + String.valueOf(round(longitude*10000)/10000.0) + ", "
+                + String.valueOf(round(latitude*10000)/10000.0) + ")";
+        //sms
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage("+14042717277", null, COORD, null, null);
     }
 
     @Override
@@ -49,7 +86,6 @@ public class MainActivity extends AbstractPhoneGestureActivity {
         phoneCallIntent.setData(Uri.parse("tel:+14042717277"));
         startActivity(phoneCallIntent);
     }
-
 
     // monitor phone call states
     private class PhoneCallListener extends PhoneStateListener {
@@ -113,7 +149,6 @@ public class MainActivity extends AbstractPhoneGestureActivity {
 
     @Override
     public void onWindowClosed() {
-        Log.e("MainActivity","This function should not be called unless windowed gesture detection is enabled.");
+        Log.e("MainActivity", "This function should not be called unless windowed gesture detection is enabled.");
     }
-
 }

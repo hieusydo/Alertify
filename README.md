@@ -1,3 +1,4 @@
-# Alertify - based on PrestoSampleApp
-A twist of your wrist, detected by an Android Wear, in emergency situation will trigger an emergency alert (phone call, text message, recording, etc). 
+# PrestoSampleApp
+A sample application using the Presto Android Plugin, which makes it easy to build apps powered by gesture. 
 
+See <a href="http://presto.watch">http://presto.watch</a> for more information.

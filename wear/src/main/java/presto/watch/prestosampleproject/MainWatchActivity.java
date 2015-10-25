@@ -69,7 +69,7 @@ public class MainWatchActivity extends AbstractGestureClientActivity {
 
     @Override
     public void onTwist() {
-        Toast.makeText(this,"Just twist it and... CALL",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"Just twist it",Toast.LENGTH_LONG).show();
     }
 
     @Override

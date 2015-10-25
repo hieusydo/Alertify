@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">Alertify</string>
-    <string name="hello_world">Twist your wrist to trigger a phone call</string>
+    <string name="app_name">Presto Sample Project</string>
+    <string name="hello_world">Hello World!</string>
 </resources>
