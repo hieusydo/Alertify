@@ -1,4 +1,4 @@
-# PrestoSampleApp
-A sample application using the Presto Android Plugin, which makes it easy to build apps powered by gesture. 
-
-See <a href="http://presto.watch">http://presto.watch</a> for more information.
+# Alertify - based on PrestoSampleApp
+Using Presto technology to detect wrist gesture and trigger actions in case of emergency
+-flick to send text with GPS coordinates
+-twist to trigger a phone call

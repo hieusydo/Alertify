@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Presto Sample Project</string>
-    <string name="hello_world">Hello World!</string>
+    <string name="hello_world">Flick to send text. Twist to make a call.</string>
 </resources>
